@@ -13,6 +13,11 @@ class PokemonService
         $this->client = $client;
     }
 
+    public function check()
+    {
+        return 1;
+    }
+
     public function sortByNameAsc(array $pokemons): array
     {
         if (count($pokemons) <= 1) {
@@ -32,7 +37,7 @@ class PokemonService
             }
         }
 
-        return array_merge($this->sortByNameAsc($less_than), $pivot, $this->sortByNameAsc($greater_than));
+        return array_merge($this->sortByNameAsc($less_than), [$pivot], $this->sortByNameAsc($greater_than));
     }
 
     public function getPokemonAmount(): int
@@ -64,7 +69,9 @@ class PokemonService
 
             if ($response->getStatusCode() == 200 && $content = $response->toArray()) {
                 foreach ($content['results'] as $el) {
-                    $pokemons[] = ['name' => $el['name'], 'url' => $el['url'],
+                    $pokemons[] = [
+                        'name' => $el['name'],
+                        'url' => $el['url'],
                         'details' => 'Our desc ...',
                         'img_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png'];
                 }

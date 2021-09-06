@@ -22,23 +22,8 @@ class ApiController extends AbstractController
      */
     public function getPokemons()
     {
-//        $data = [
-//        [
-//            'id' => 1,
-//            'name' => 'First',
-//            'details' => 'Our desc ...',
-//            'img_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png'
-//        ],
-//        [
-//            'id' => 2,
-//            'name' => 'Second',
-//            'details' => 'Your component library for ...',
-//            'img_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png'
-//        ]];
-
         $pokemons = $this->service->getAllPokemons();
 
-        return new JsonResponse([$this->service->sortByNameAsc($pokemons)]);
-
+        return new JsonResponse($this->service->sortByNameAsc($pokemons));
     }
 }
