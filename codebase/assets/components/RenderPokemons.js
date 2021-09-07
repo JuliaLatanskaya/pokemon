@@ -31,7 +31,7 @@ function RenderPokemons() {
     );
 
     return <div>
-        <h1>Pockemon Team</h1>
+        <h1 className="text-center">Pockemon Team</h1>
         <table className="table table-bordered table-striped table-hover">{listItems}</table>
     </div>;
 }

@@ -24,7 +24,7 @@ function RenderSinglePokemon({ url, name }) {
         return (<tr>
             <td onClick={() => setPokemonShow(pokemonInfo.details)}><p>{name}</p></td>
             <td onClick={() => setPokemonShow(pokemonInfo.details)}><img  src={pokemonInfo.logo}/></td>
-            <td><div>{pokemonShow}</div></td>
+            <td className="fixed"><div>{pokemonShow}</div></td>
         </tr>);
     }
 
