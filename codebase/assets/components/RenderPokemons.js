@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import RenderSinglePokemon from './RenderSinglePokemon';
 
-function RenderPokemon() {
+function RenderPokemons() {
     const [pokemonData, setPokemonData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -31,8 +31,9 @@ function RenderPokemon() {
     );
 
     return <div>
-        <div>{listItems}</div>
+        <h1>Pockemon Team</h1>
+        <table className="table table-bordered table-striped table-hover">{listItems}</table>
     </div>;
 }
 
-export default RenderPokemon;
+export default RenderPokemons;

@@ -21,11 +21,11 @@ function RenderSinglePokemon({ url, name }) {
     if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
     if (pokemonInfo) {
-        return <div>
-            <p onClick={() => setPokemonShow(pokemonInfo.details)}>{name}</p>
-            <img onClick={() => setPokemonShow(pokemonInfo.details)} src={pokemonInfo.logo}/>
-            <div>{pokemonShow}</div>
-        </div>;
+        return (<tr>
+            <td onClick={() => setPokemonShow(pokemonInfo.details)}><p>{name}</p></td>
+            <td onClick={() => setPokemonShow(pokemonInfo.details)}><img  src={pokemonInfo.logo}/></td>
+            <td><div>{pokemonShow}</div></td>
+        </tr>);
     }
 
     if (!pokemonInfo) {

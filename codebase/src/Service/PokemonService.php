@@ -93,27 +93,4 @@ class PokemonService
 
         return $pokemons;
     }
-
-    public function buildPokemon(array $data): array
-    {
-        $pokemon = [];
-
-        $response = $this->client->request(
-            'GET',
-            $data['url']
-        );
-
-        if ($response->getStatusCode() == 200 && $content = $response->toArray()) {
-            $pokemon = [
-                'name' => $data['name'],
-                'logo' => $content['sprites']['front_default'],
-                'details' => "It's weight is {$content['weight']}. It's height is {$content['height']}. It has " . count($content['abilities']) . ' abilities.',
-                ];
-        } else {
-            throw new \Exception('Failed to get pokemon with url: ' . $data['url']);
-        }
-
-
-        return $pokemon;
-    }
 }

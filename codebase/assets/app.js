@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RenderPokemon from './components/RenderPokemon';
-import './styles/app.css';
+import RenderPokemons from './components/RenderPokemons';
 
-
-ReactDOM.render( <RenderPokemon />, document.getElementById('root'));
+ReactDOM.render( <RenderPokemons />, document.getElementById('root'));
