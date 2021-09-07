@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
+import RenderSinglePokemon from './RenderSinglePokemon';
 
 function RenderPokemon() {
     const [pokemonData, setPokemonData] = useState(null);
-    const [pokemonDetails, setPokemonDetails] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -15,6 +15,7 @@ function RenderPokemon() {
             .catch(setError);
     }, []);
 
+
     if(loading) return <h1>Loading.......</h1>;
     if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
@@ -24,16 +25,13 @@ function RenderPokemon() {
 
     // eslint-disable-next-line react/prop-types
     const listItems = pokemonData.map((el) =>
+
         // eslint-disable-next-line react/jsx-key
-        <div >
-            <p onClick={() => setPokemonDetails(el.details)}>{el.name}</p>
-            <img onClick={() => setPokemonDetails(el.details)} src={el.img_url} />
-        </div>
+        <RenderSinglePokemon url={el.url} name={el.name} />
     );
 
     return <div>
         <div>{listItems}</div>
-        <div>{pokemonDetails}</div>
     </div>;
 }
 

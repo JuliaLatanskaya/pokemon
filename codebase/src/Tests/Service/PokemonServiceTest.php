@@ -40,13 +40,13 @@ class PokemonServiceTest extends KernelTestCase
         $pokemonService = $container->get(PokemonService::class);
 
         $data = [
-            ['name' => 'secondelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'firstelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test']
+            ['name' => 'secondelement'],
+            ['name' => 'firstelement']
         ];
 
         $expected_data = [
-            ['name' => 'firstelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'secondelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test']
+            ['name' => 'firstelement'],
+            ['name' => 'secondelement']
         ];
 
         $this->assertEquals($expected_data, $pokemonService->sortByNameAsc($data));
@@ -61,19 +61,19 @@ class PokemonServiceTest extends KernelTestCase
         $pokemonService = $container->get(PokemonService::class);
 
         $data = [
-            ['name' => 'wave', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'secondelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'third', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'yani', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'firstelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
+            ['name' => 'wave'],
+            ['name' => 'secondelement'],
+            ['name' => 'third'],
+            ['name' => 'yani'],
+            ['name' => 'firstelement'],
         ];
 
         $expected_data = [
-            ['name' => 'firstelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'secondelement', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'third', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'wave', 'url' => 'test', 'details' => 'test', 'img_url' => 'test'],
-            ['name' => 'yani', 'url' => 'test', 'details' => 'test', 'img_url' => 'test']
+            ['name' => 'firstelement'],
+            ['name' => 'secondelement'],
+            ['name' => 'third'],
+            ['name' => 'wave'],
+            ['name' => 'yani']
         ];
 
         $this->assertEquals($expected_data, $pokemonService->sortByNameAsc($data));

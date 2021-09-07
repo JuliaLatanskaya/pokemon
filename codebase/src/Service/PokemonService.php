@@ -13,9 +13,24 @@ class PokemonService
         $this->client = $client;
     }
 
-    public function check()
+    public function getSinglePokemon(string $url): array
     {
-        return 1;
+        $pokemon = [];
+        $response = $this->client->request(
+            'GET',
+            $url
+        );
+
+        if ($response->getStatusCode() == 200 && $content = $response->toArray()) {
+            $pokemon = [
+                'logo' => $content['sprites']['front_default'],
+                'details' => "It's weight is {$content['weight']}. It's height is {$content['height']}. It has " . count($content['abilities']) . ' abilities.',
+            ];
+        } else {
+            throw new \Exception('Failed to receive info by : ' . $url);
+        }
+
+        return $pokemon;
     }
 
     public function sortByNameAsc(array $pokemons): array
@@ -51,6 +66,8 @@ class PokemonService
             if (isset($content['count'])) {
                 return $content['count'];
             }
+        } else {
+            throw new \Exception('Failed to receive info by : ' . 'https://pokeapi.co/api/v2/pokemon/');
         }
 
         return 0;
@@ -68,16 +85,35 @@ class PokemonService
             );
 
             if ($response->getStatusCode() == 200 && $content = $response->toArray()) {
-                foreach ($content['results'] as $el) {
-                    $pokemons[] = [
-                        'name' => $el['name'],
-                        'url' => $el['url'],
-                        'details' => 'Our desc ...',
-                        'img_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png'];
-                }
+                $pokemons = $content['results'];
+            } else {
+                throw new \Exception('Failed to get pokemons via url: ' . 'https://pokeapi.co/api/v2/pokemon/?limit=' . $count);
             }
         }
 
         return $pokemons;
+    }
+
+    public function buildPokemon(array $data): array
+    {
+        $pokemon = [];
+
+        $response = $this->client->request(
+            'GET',
+            $data['url']
+        );
+
+        if ($response->getStatusCode() == 200 && $content = $response->toArray()) {
+            $pokemon = [
+                'name' => $data['name'],
+                'logo' => $content['sprites']['front_default'],
+                'details' => "It's weight is {$content['weight']}. It's height is {$content['height']}. It has " . count($content['abilities']) . ' abilities.',
+                ];
+        } else {
+            throw new \Exception('Failed to get pokemon with url: ' . $data['url']);
+        }
+
+
+        return $pokemon;
     }
 }
